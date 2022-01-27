@@ -39,5 +39,5 @@ app.get("/write", (req,res) => {
 
 // 서버 실행 
 app.listen(port, () => {
-    console.log(port, "포트로 서버가 켜졌어요!");
+    console.log(port, "포트로 서버가 켜졌어요");
 });
