@@ -1,6 +1,7 @@
 // 초기 세팅
 
 const express = require("express");
+const bodyParser = require("body-parser")
 const app = express();
 const port = 3000;
 
@@ -19,7 +20,7 @@ app.use(requestMiddleware);
 app.use(express.json());
 app.use(express.urlencoded(false));
 app.use(express.static("static"));
-app.use(bodyPaser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded(false));
 
 
