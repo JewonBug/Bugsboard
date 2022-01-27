@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- jQuery -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Bugs board</title>
+    <style>
+        body {
+            padding-bottom: 30px;
+        }
+    </style>
+    <script>
+        function save() {
+            let title = $('#inputtitle').val()
+            let name = $('#inputname').val()
+            let content = $('#inputcontent').val()
+            let password = $('#inputpassword').val()
+
+            if ((name === '' || password === '' || title === '' || content === '')) return alert('모두 작성해 주세요.')
+            $.ajax({
+                type: "POST",
+                url: "api/board",
+                data: {
+                    name: name,
+                    password: password,
+                    title: title,
+                    content: content
+                },
+                success: function (response) { // 성공하면
+                    console.log(response)
+                    let al = response['msg']
+                    alert(al)
+                    location.href = '/'
+                },
+            });
+        };
+
+    </script>
+</head>
+
+<body>
+
+
+        <div class="container">
+            <br>
+            <br>
+            <h1 class="text-center"><a href = "/"> Bugs Board </a></h1>
+            <br>
+            <form name="form" id="form" role="form" method="post"
+                action="/board/write">
+
+                <div class="mb-3">
+
+                    <label for="title">제목</label>
+
+                    <input type="text" class="form-control" id="inputtitle" placeholder="제목을 입력해 주세요">
+
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="reg_id">작성자</label>
+                    <input type="text" class="form-control" id="inputname" placeholder="이름을 입력해 주세요">
+                </div>
+
+                <div class="mb-3">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" rows="5" id="inputcontent" placeholder="내용을 입력해 주세요"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="reg_id">비밀번호</label>
+                    <input type="text" class="form-control" id="inputpassword" placeholder="비밀번호를 입력해 주세요">
+                </div>
+            </form>
+            <div>
+                <button type="button" class="btn btn-sm btn-primary" onclick="save()">저장</button>
+                <button type="button" class="btn btn-sm btn-primary" onclick="location.href='/'">목록</button>
+            </div>
+        </div>
+        <script>
+            
+        </script>
+</body>
+</html>
